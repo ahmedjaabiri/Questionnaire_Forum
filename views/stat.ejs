@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/assets/semantic/semantic.min.css" />
+    <style>
+        .main.container {
+            margin-top: 7em;
+        }
+
+        .inputfile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body style="padding-left: 15%; padding-right: 15%; padding-bottom: 10%;">
+    <h1>Statistiques du formulaire</h1>
+    <div class="field">
+        <table class="ui celled structured table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Option</th>
+                    <th>Nombre de réponses</th>
+                    <th>Pourcentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% var k=0 %>
+                <% var n=1 %>
+                <% for(let i =0; i < qs.length ;i++){ %>
+                <% let t=0 %>
+                <tr>
+                    <td rowspan="<%=qs[i+1]%>"><%=qs[i]%></td>
+                    <td><%=opt[k]%></td>
+                    <td><%=topt[k]%></td>
+                    <!-- calcul total -->
+                    <% var nb =qs[i+1]+k; %>
+                    <% for(let a=k; a< nb; a++) {
+                        t+=topt[a];
+                    }%>
+                    <td><%= (topt[k]/t)*100 %></td>
+                    <%k+=qs[i+1] %>
+                </tr>
+                <% console %>
+                <% for(let j=n; j< qs[i+1]+n-1; j++) {%>
+                <tr>
+                    <td><%= opt[j] %></td>
+                    <td><%= topt[j] %></td>
+                    <td><%= (topt[j]/t)*100 %></td>
+                </tr>
+                <%}%>
+                <% n+=qs[i+1] %>
+                <% i++ %>
+                <%}%>
+            </tbody>
+        </table>
+    </div>
+</br></br>
+    <a href="/">
+        <button type="submit" class="ui blue labeled submit icon button">
+            Retourner
+        </button>
+    </a>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/assets/semantic/semantic.min.css" />
+    <style>
+      .main.container {
+        margin-top: 7em;
+      }
+      .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body style="padding-left: 15%; padding-right: 15%; padding-bottom: 10%;">
+    <h1><%= result.name %></h1>
+    <form action="/rep?id=<%= result._id %>" method="POST" class="ui form" name="form">
+      <div class="field">
+        <% for(let i =0; i < result.question[0].length;i++){ %>
+        <label for="name"><%= result.question[0][i] %></label>
+        <input type="text" name="repl<%=i%>" id="formname" required/>
+          <%}%>
+        <div id="qstc">
+        <% for(let i =0; i < result.question[1].length;i+=2){ %>
+          <div>
+            <label for="name"><%= result.question[1][i] %></label></br></br>
+            <% for(let j =0; j < result.question[1][i+1].length;j++){ %>
+              <input type="radio" id="<%= result.question[1][i] %>"
+              name="opt<%= i %>" value="<%= result.question[1][i+1][j] %>" checked="true">
+             <label for="name"><%= result.question[1][i+1][j] %></label>
+             <%}%>
+            </br></br>
+          </div>
+        <%}%>
+        </div>
+      </div>
+      <button type="submit" class="ui blue labeled submit icon button">
+        Envoyer
+      </button>
+    </form>
+  </br></br>
+  <a href="/">
+      <button type="submit" class="ui blue labeled submit icon button">
+          Retourner
+      </button>
+  </a>
+  </body>
+</html>
